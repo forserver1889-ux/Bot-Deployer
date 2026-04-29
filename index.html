@@ -2,17 +2,19 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Professional Xosting Tariflari</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2563eb;
             --dark-color: #1e293b;
-            --light-bg: #f8fafc;
+            --light-bg: #f1f5f9;
             --white: #ffffff;
             --border-color: #e2e8f0;
         }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -20,59 +22,161 @@
             color: var(--dark-color);
             margin: 0;
             padding: 0;
+            line-height: 1.5;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 20px 15px; }
 
         /* Header */
-        .header { text-align: center; padding: 50px 0; background: var(--white); border-bottom: 1px solid var(--border-color); }
-        .header h1 { margin: 0; font-size: 2rem; }
-        .header p { color: #64748b; margin-top: 10px; }
+        .header { 
+            text-align: center; 
+            padding: 40px 20px; 
+            background: var(--white); 
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .header h1 { margin: 0; font-size: 1.75rem; color: var(--dark-color); }
+        .header p { color: #64748b; margin-top: 8px; font-size: 0.95rem; }
 
         /* Navigation */
-        .section-nav { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .section-nav button {
-            padding: 12px 24px; border: 1px solid var(--border-color); background: var(--white);
-            border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s;
+        .section-nav { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin: 20px 0; 
+            background: #e2e8f0;
+            padding: 5px;
+            border-radius: 12px;
         }
-        .section-nav button.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .section-nav button {
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            color: #64748b;
+        }
+        .section-nav button.active { 
+            background: var(--white); 
+            color: var(--primary-color); 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
 
-        /* Tables */
+        /* Responsive Cards instead of Tables */
         .pricing-section { display: none; }
         .pricing-section.active { display: block; }
-        .table-container { background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { background: #f1f5f9; padding: 15px; font-size: 0.85rem; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #f1f5f9; }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .plan-name { font-size: 1.2rem; font-weight: 800; color: var(--dark-color); }
+        
+        .duration-badge {
+            font-size: 0.7rem; background: #dbeafe; color: #1e40af;
+            padding: 4px 10px; border-radius: 20px; font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .plan-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            font-size: 0.85rem;
+            background: #f8fafc;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .detail-label { color: #64748b; display: block; font-size: 0.75rem; margin-bottom: 2px; }
+        .detail-value { font-weight: 600; color: #1e293b; }
+
+        .plan-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
 
         .btn-buy {
-            display: inline-block; padding: 8px 16px; background: var(--primary-color); color: white;
-            text-decoration: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
         }
+        .btn-buy:active { transform: scale(0.98); opacity: 0.9; }
 
-        .duration-badge {
-            font-size: 0.75rem; background: #e0e7ff; color: #4338ca;
-            padding: 2px 8px; border-radius: 10px; margin-left: 5px; font-weight: 400;
-        }
-
-        /* Admin Panel Styles */
-        #admin-gate { position: fixed; bottom: 5px; right: 5px; width: 15px; height: 15px; cursor: pointer; opacity: 0.05; background: black; border-radius: 50%; }
+        /* Admin Panel Mobile Optimization */
+        #admin-gate { position: fixed; bottom: 10px; right: 10px; width: 30px; height: 30px; cursor: pointer; opacity: 0.1; background: black; border-radius: 50%; z-index: 9999; }
+        
         #admin-panel {
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 95%; max-width: 800px; background: white; padding: 25px; border-radius: 15px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.4); z-index: 1000; max-height: 85vh; overflow-y: auto;
+            display: none; position: fixed; top: 0; left: 0; 
+            width: 100%; height: 100%; background: white; 
+            padding: 20px; z-index: 1001; overflow-y: auto;
         }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; }
-        .admin-form-group { margin-bottom: 15px; background: #f9fafb; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
-        .admin-form-group label { display: block; margin-bottom: 5px; font-weight: 700; color: #1e293b; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
-        .admin-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-        .admin-inputs div { display: flex; flex-direction: column; }
-        .admin-inputs span { font-size: 0.75rem; color: #64748b; margin-bottom: 2px; }
-        .admin-inputs input { padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; }
-        .admin-actions { position: sticky; bottom: -25px; background: white; padding: 15px 0; display: flex; gap: 10px; border-top: 1px solid #eee; }
-        .btn-admin { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; flex: 1; }
-        .btn-save { background: #10b981; color: white; }
-        .btn-close { background: #ef4444; color: white; }
+        
+        .admin-form-group { 
+            margin-bottom: 20px; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 1px solid #e2e8f0; 
+        }
+
+        .admin-inputs input { 
+            width: 100%;
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .admin-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        /* Tables Hidden on Mobile, Cards Shown */
+        @media (min-width: 768px) {
+            .grid-container { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+        }
+
     </style>
 </head>
 <body>
@@ -80,7 +184,7 @@
 <header class="header">
     <div class="container">
         <h1>Xosting Xizmatlari</h1>
-        <p>Ishonchli va tezkor serverlar — barcha tariflar 1 oylik muddat uchun</p>
+        <p>Barcha tariflar 1 oylik muddat uchun</p>
     </div>
 </header>
 
@@ -91,61 +195,45 @@
     </div>
 
     <div id="bot-section" class="pricing-section active">
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>Tarif nomi</th><th>RAM</th><th>CPU</th><th>Disk</th><th>Narxi (1 oy)</th><th>Amal</th></tr>
-                </thead>
-                <tbody id="bot-tbody"></tbody>
-            </table>
-        </div>
+        <div id="bot-cards" class="grid-container"></div>
     </div>
 
     <div id="site-section" class="pricing-section">
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>Tarif nomi</th><th>Trafik</th><th>Disk</th><th>Saytlar</th><th>Narxi (1 oy)</th><th>Amal</th></tr>
-                </thead>
-                <tbody id="site-tbody"></tbody>
-            </table>
-        </div>
+        <div id="site-cards" class="grid-container"></div>
     </div>
 </div>
 
 <div id="admin-gate" onclick="openAdmin()"></div>
 
-<div class="overlay" id="overlay" onclick="closeAdmin()"></div>
 <div id="admin-panel">
-    <h3>Boshqaruv Paneli</h3>
+    <h2 style="margin-top:0">Boshqaruv Paneli</h2>
     
     <div id="login-section">
         <div class="admin-form-group">
             <label>Kirish paroli:</label>
-            <input type="password" id="admin-pass-input" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="password" id="admin-pass-input" placeholder="Parolni kiriting">
         </div>
-        <button class="btn-admin btn-save" onclick="checkLogin()">Kirish</button>
+        <button class="btn-buy" onclick="checkLogin()">Kirish</button>
+        <button class="btn-buy" style="background:#64748b; margin-top:10px;" onclick="closeAdmin()">Yopish</button>
     </div>
 
     <div id="edit-section" style="display:none;">
-        <div style="background: #fff4f4; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+        <div style="background: #fef2f2; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
             <h4 style="margin:0 0 10px 0;">Parolni yangilash</h4>
-            <input type="password" id="new-password" placeholder="Yangi parol" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-            <button class="btn-admin btn-save" style="flex:none;" onclick="updatePassword()">Saqlash</button>
+            <input type="password" id="new-password" placeholder="Yangi parol" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;">
+            <button class="btn-buy" style="margin-top:10px; padding:8px;" onclick="updatePassword()">Yangilash</button>
         </div>
 
-        <h4>Tarif ma'lumotlarini tahrirlash</h4>
         <div id="editor-fields"></div>
 
         <div class="admin-actions">
-            <button class="btn-admin btn-save" onclick="saveData()">Saqlash va Saytni Yangilash</button>
-            <button class="btn-admin btn-close" onclick="closeAdmin()">Yopish</button>
+            <button class="btn-buy" style="background: #10b981;" onclick="saveData()">Saqlash</button>
+            <button class="btn-buy" style="background: #ef4444;" onclick="closeAdmin()">Yopish</button>
         </div>
     </div>
 </div>
 
 <script>
-    // Boshlang'ich ma'lumotlar (Free olib tashlangan)
     const initialBotData = [
         {name: "Starter", ram: "256 MB", cpu: "1%", disk: "1 GB", price: "24,990 So'm", time: "1 oy"},
         {name: "Basic", ram: "512 MB", cpu: "3%", disk: "2 GB", price: "49,990 So'm", time: "1 oy"},
@@ -169,28 +257,40 @@
     let adminPass = localStorage.getItem('adminPass') || 'admin123';
 
     function renderTables() {
-        const botTbody = document.getElementById('bot-tbody');
-        botTbody.innerHTML = botData.map(item => `
-            <tr>
-                <td><strong>${item.name}</strong> <span class="duration-badge">${item.time}</span></td>
-                <td>${item.ram}</td>
-                <td>${item.cpu}</td>
-                <td>${item.disk}</td>
-                <td style="color:#2563eb; font-weight:700;">${item.price}</td>
-                <td><a href="https://t.me/Bot_Deploy" class="btn-buy">Sotib olish</a></td>
-            </tr>
+        // Bot Cards
+        const botContainer = document.getElementById('bot-cards');
+        botContainer.innerHTML = botData.map(item => `
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-name">${item.name}</div>
+                    <span class="duration-badge">${item.time}</span>
+                </div>
+                <div class="plan-details">
+                    <div class="detail-item"><span class="detail-label">RAM</span><div class="detail-value">${item.ram}</div></div>
+                    <div class="detail-item"><span class="detail-label">CPU</span><div class="detail-value">${item.cpu}</div></div>
+                    <div class="detail-item"><span class="detail-label">Disk</span><div class="detail-value">${item.disk}</div></div>
+                </div>
+                <div class="plan-price">${item.price}</div>
+                <a href="https://t.me/Bot_Deploy" class="btn-buy">Sotib olish</a>
+            </div>
         `).join('');
 
-        const siteTbody = document.getElementById('site-tbody');
-        siteTbody.innerHTML = siteData.map(item => `
-            <tr>
-                <td><strong>${item.name}</strong> <span class="duration-badge">${item.time}</span></td>
-                <td>${item.traffic}</td>
-                <td>${item.disk}</td>
-                <td>${item.sites}</td>
-                <td style="color:#2563eb; font-weight:700;">${item.price}</td>
-                <td><a href="https://t.me/Bot_Deploy" class="btn-buy">Sotib olish</a></td>
-            </tr>
+        // Site Cards
+        const siteContainer = document.getElementById('site-cards');
+        siteContainer.innerHTML = siteData.map(item => `
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-name">${item.name}</div>
+                    <span class="duration-badge">${item.time}</span>
+                </div>
+                <div class="plan-details">
+                    <div class="detail-item"><span class="detail-label">Trafik</span><div class="detail-value">${item.traffic}</div></div>
+                    <div class="detail-item"><span class="detail-label">Disk</span><div class="detail-value">${item.disk}</div></div>
+                    <div class="detail-item"><span class="detail-label">Saytlar</span><div class="detail-value">${item.sites}</div></div>
+                </div>
+                <div class="plan-price">${item.price}</div>
+                <a href="https://t.me/Bot_Deploy" class="btn-buy">Sotib olish</a>
+            </div>
         `).join('');
     }
 
@@ -199,16 +299,17 @@
         document.getElementById('site-section').classList.toggle('active', type === 'site');
         document.getElementById('btn-bot').classList.toggle('active', type === 'bot');
         document.getElementById('btn-site').classList.toggle('active', type === 'site');
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    function openAdmin() {
-        document.getElementById('overlay').style.display = 'block';
-        document.getElementById('admin-panel').style.display = 'block';
+    function openAdmin() { 
+        document.getElementById('admin-panel').style.display = 'block'; 
+        document.body.style.overflow = 'hidden';
     }
 
-    function closeAdmin() {
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('admin-panel').style.display = 'none';
+    function closeAdmin() { 
+        document.getElementById('admin-panel').style.display = 'none'; 
+        document.body.style.overflow = 'auto';
         document.getElementById('login-section').style.display = 'block';
         document.getElementById('edit-section').style.display = 'none';
     }
@@ -219,9 +320,7 @@
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('edit-section').style.display = 'block';
             renderEditor();
-        } else {
-            alert("Parol noto'g'ri!");
-        }
+        } else { alert("Parol noto'g'ri!"); }
     }
 
     function updatePassword() {
@@ -234,29 +333,15 @@
     }
 
     function renderEditor() {
-        let html = '<h5 style="color:var(--primary-color)">🤖 Bot Hosting</h5>';
+        let html = '<h3 style="color:var(--primary-color)">🤖 Bot Hosting</h3>';
         botData.forEach((item, i) => {
             html += `
                 <div class="admin-form-group">
-                    <label>${item.name}</label>
+                    <label><strong>${item.name}</strong></label>
                     <div class="admin-inputs">
-                        <div><span>Vaqt</span><input type="text" id="b-time-${i}" value="${item.time}"></div>
-                        <div><span>RAM</span><input type="text" id="b-ram-${i}" value="${item.ram}"></div>
-                        <div><span>Disk</span><input type="text" id="b-disk-${i}" value="${item.disk}"></div>
-                        <div><span>Narx</span><input type="text" id="b-price-${i}" value="${item.price}"></div>
-                    </div>
-                </div>`;
-        });
-
-        html += '<h5 style="color:var(--primary-color); margin-top:30px;">🌐 Sayt Hosting</h5>';
-        siteData.forEach((item, i) => {
-            html += `
-                <div class="admin-form-group">
-                    <label>${item.name}</label>
-                    <div class="admin-inputs">
-                        <div><span>Vaqt</span><input type="text" id="s-time-${i}" value="${item.time}"></div>
-                        <div><span>Disk</span><input type="text" id="s-disk-${i}" value="${item.disk}"></div>
-                        <div><span>Narx</span><input type="text" id="s-price-${i}" value="${item.price}"></div>
+                        <span>Vaqt:</span><input type="text" id="b-time-${i}" value="${item.time}">
+                        <span>RAM:</span><input type="text" id="b-ram-${i}" value="${item.ram}">
+                        <span>Narx:</span><input type="text" id="b-price-${i}" value="${item.price}">
                     </div>
                 </div>`;
         });
@@ -267,22 +352,15 @@
         botData.forEach((item, i) => {
             item.time = document.getElementById(`b-time-${i}`).value;
             item.ram = document.getElementById(`b-ram-${i}`).value;
-            item.disk = document.getElementById(`b-disk-${i}`).value;
             item.price = document.getElementById(`b-price-${i}`).value;
         });
-        siteData.forEach((item, i) => {
-            item.time = document.getElementById(`s-time-${i}`).value;
-            item.disk = document.getElementById(`s-disk-${i}`).value;
-            item.price = document.getElementById(`s-price-${i}`).value;
-        });
         localStorage.setItem('botData', JSON.stringify(botData));
-        localStorage.setItem('siteData', JSON.stringify(siteData));
         renderTables();
-        alert('Ma\'lumotlar saqlandi!');
+        alert('Saqlandi!');
+        closeAdmin();
     }
 
     renderTables();
 </script>
-
 </body>
 </html>
